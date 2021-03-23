@@ -1,16 +1,14 @@
 from flask import request
 from main import app
-import pandas as pd
-from flask_cors import cross_origin
 from PIL import Image
 from torchvision import transforms
-import pickle
 import torch
+import urllib
 
 
-@app.route('/')
+@app.route('/', methods=['POST'])
 def index():
-    input_image = Image.open('OurFood\\Fruits\\Apple\\app.jpg')
+    input_image = Image.open(urllib.request.urlopen(request.json['url']))
     preprocess = transforms.Compose([
         transforms.Resize(256),
         transforms.CenterCrop(224),
@@ -21,19 +19,16 @@ def index():
     input_tensor = preprocess(input_image)
     input_batch = input_tensor.unsqueeze(0)
 
-
-    model = torch.load('best_classifier.pt')
+    model = torch.load('main/best_classifier.pt', map_location='cpu')
     if torch.cuda.is_available():
         input_batch = input_batch.to('cuda')
         model.to('cuda')
     with torch.no_grad():
         output = model(input_batch)
-    with open("food_labels.txt", "r") as f:
+    with open("main/food_labels.txt", "r") as f:
         categories = [s.strip() for s in f.readlines()]
 
-
-
+    probabilities = torch.nn.functional.softmax(output[0], dim=0)
     top1_prob, top1_catid = torch.topk(probabilities, 1)
-    print(categories[top1_catid[0]])
 
-    return {"response": True}
+    return {"response": categories[top1_catid[0]]}
