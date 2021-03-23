@@ -1,7 +1,22 @@
 import { Col, Container, Row } from "reactstrap";
 import { Form, Input } from "semantic-ui-react";
+import { useDispatch } from "react-redux";
+import { uploadContent } from "../Store/Actioncreator";
+import { useState } from "react";
 
-function Home() {
+function Home(props) {
+  const [img, setImg] = useState("");
+  const dispatch = useDispatch();
+  const handleUpload = (e) => {
+    const file = e?.target?.files[0];
+    if (file) {
+      console.log(file);
+      const data = {
+        file: file,
+      };
+      dispatch(uploadContent(data)).then((res) => setImg(res));
+    }
+  };
   return (
     <Container>
       <Row>
@@ -15,7 +30,7 @@ function Home() {
           <Form>
             <Form.Field>
               <label>Upload Image</label>
-              <Input type="file" accept="Image/*" />
+              <Input type="file" accept="Image/*" onChange={handleUpload} />
             </Form.Field>
           </Form>
         </Col>
