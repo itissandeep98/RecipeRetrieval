@@ -1,0 +1,25 @@
+name: gh pages publish
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: publish package
+        run: |
+          git config --global init.defaultBranch "main"
+          cd frontend
+          npm install
+          git config user.name "khansajeel"
+          git config user.email "sajeel18342@iiitd.ac.in"
+          git remote set-url origin https://khansajeel:${{secrets.ACCESS_TOKEN}}@github.com/khansajeel/InformationRetrieval_2021_T34_Project
+          npm run deploy
