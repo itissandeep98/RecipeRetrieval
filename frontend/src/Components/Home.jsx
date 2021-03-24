@@ -1,28 +1,29 @@
 import { Col, Container, Row } from "reactstrap";
-import { Form, Image, Input } from "semantic-ui-react";
-import { connect, useDispatch } from "react-redux";
-import { getData, uploadContent } from "../Store/Actioncreator";
-import { useEffect, useState } from "react";
+import { Tab } from "semantic-ui-react";
+import { connect } from "react-redux";
+import ImagePredict from "./ImagePredict";
+import Comparators from "./Comparators";
 
 function Home(props) {
   const res = props.model;
-  const [img, setImg] = useState("");
-  const dispatch = useDispatch();
-  const handleUpload = (e) => {
-    const file = e?.target?.files[0];
-    if (file) {
-      const data = {
-        file: file,
-      };
-      dispatch(uploadContent(data)).then((res) => setImg(res));
-    }
-  };
-
-  useEffect(() => {
-    if (img) {
-      dispatch(getData({ url: img }));
-    }
-  }, [img, dispatch]);
+  const panes = [
+    {
+      menuItem: "Image Prediction",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <ImagePredict res={res} />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Comparators",
+      render: () => (
+        <Tab.Pane attached={false}>
+          <Comparators res={res.result} />
+        </Tab.Pane>
+      ),
+    },
+  ];
   return (
     <Container>
       <Row>
@@ -31,29 +32,8 @@ function Home(props) {
           <h3>Recipe Retrieval System</h3>
         </Col>
       </Row>
-      <Row className=" shadow p-3 bg-white mt-3 rounded">
-        <Col>
-          <Form>
-            <Form.Field>
-              <label>Upload Image</label>
-              <Input type="file" accept="Image/*" onChange={handleUpload} />
-            </Form.Field>
-            <Form.Field>
-              <label>Image URL</label>
-              <Input value={img} />
-            </Form.Field>
-          </Form>
-        </Col>
-        {img && (
-          <Col>
-            <Image src={img} alt="content" />
-          </Col>
-        )}
-        <Col xs={12}>
-          <h3>Response: </h3>
-          <p className="text-muted">{res?.data}</p>
-        </Col>
-      </Row>
+
+      <Tab menu={{ pointing: true }} panes={panes} className="mt-5" />
     </Container>
   );
 }

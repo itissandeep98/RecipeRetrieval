@@ -1,3 +1,4 @@
+from main.models import *
 from flask import request
 from main import app
 from PIL import Image
@@ -32,3 +33,16 @@ def index():
     top1_prob, top1_catid = torch.topk(probabilities, 1)
 
     return {"response": categories[top1_catid[0]]}
+
+
+@app.route('/comparator', methods=['POST'])
+def comparator():
+    sentence_query = request.json['sentence']
+
+    # Performing preprocessing(splitting, uppercase, stripping space from endpoints) on the operand input
+    operands_ = list(
+        map(str.strip, request.json['operands'].upper().split(",")))
+
+    query = Query("main/output_25k.json")
+    sol = query.processQuery(sentence_query, operands_)
+    return {"response": list(sol[0].getMapping('main/mapping_25k.json')), "comparison": sol[1]}

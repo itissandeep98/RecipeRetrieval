@@ -19,6 +19,19 @@ const modelReducer = (state = initState, action) => {
     case ActionTypes.DATA_FAILED:
       return { ...state, errmess: action.errmess, isLoading: false };
 
+    case ActionTypes.COMPARATOR_REQUEST:
+      return { ...state, errmess: null, isLoading: true };
+
+    case ActionTypes.COMPARATOR_SUCCESS:
+      return {
+        ...state,
+        errmess: null,
+        result: action.data,
+      };
+
+    case ActionTypes.COMPARATOR_FAILED:
+      return { ...state, errmess: action.errmess, isLoading: false };
+
     default:
       return state;
   }

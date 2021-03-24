@@ -44,3 +44,24 @@ export const getData = (data) => {
       });
   };
 };
+
+export const getResult = (data) => {
+  return async (dispatch) => {
+    dispatch({ type: ActionTypes.COMPARATOR_REQUEST });
+    return await axios
+      .post(`${apiUrl}comparator`, data)
+      .then((response) => {
+        dispatch({
+          type: ActionTypes.COMPARATOR_SUCCESS,
+          data: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: ActionTypes.COMPARATOR_FAILED,
+          errmess: "Error in connection with Server",
+        });
+      });
+  };
+};
