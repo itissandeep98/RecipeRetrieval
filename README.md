@@ -20,3 +20,26 @@
 - pip install -r requirements.txt
 - python3 run.py
 ```
+
+## common ingredients
+Pepper
+Turmeric
+Cilantro
+flour
+Salt
+Olive oil
+Cumin
+Cream
+Cinnamon
+Thyme
+Cloves
+Ketchup
+Vanilla
+Baking Powder
+Wine
+Sugar
+Peanut Butter
+cornstarch
+Soda
+Mustard
+Soy(Sauce)***** ->soy
