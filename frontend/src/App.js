@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <div className="App bg-light" style={{minHeight:"100vh"}}>
+      <div className="App bg-gradient" style={{minHeight:"100vh"}}>
         <Routing />
       </div>
     </BrowserRouter>

@@ -1,5 +1,45 @@
-.ui.segment{
-	background: none !important;
-	box-shadow: none !important;
-	border: none !important;
+.bg-gradient {
+  background: #47a06e;
+  background: -moz-linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: -webkit-linear-gradient(
+    -45deg,
+    #ee7752,
+    #e73c7e,
+    #23a6d5,
+    #23d5ab
+  );
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#47a06e", endColorstr="#3b7cb4", GradientType=1);
+  -webkit-animation: gradient 15s ease infinite;
+  -moz-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+}
+
+.text-grad {
+  background: -webkit-linear-gradient(
+    -45deg,
+    #ee7752,
+    #e73c7e,
+    #23a6d5,
+    #23d5ab
+  );
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  font-size: 4.5em;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

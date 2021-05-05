@@ -34,6 +34,7 @@ export const getData = (data) => {
           type: ActionTypes.DATA_SUCCESS,
           data: response.data.response,
         });
+        return response.data.response;
       })
       .catch((error) => {
         console.log(error);

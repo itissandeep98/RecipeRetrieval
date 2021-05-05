@@ -21,7 +21,12 @@
 - python3 run.py
 ```
 
+## Extra Data
+
+<https://drive.google.com/drive/folders/1HsIX7RvVWkylzgJLQhMl-7V3oXWvxaTq?usp=sharing>
+
 ## common ingredients
+
 Pepper
 Turmeric
 Cilantro
@@ -42,4 +47,4 @@ Peanut Butter
 cornstarch
 Soda
 Mustard
-Soy(Sauce)***** ->soy
+Soy(Sauce)**\*** ->soy

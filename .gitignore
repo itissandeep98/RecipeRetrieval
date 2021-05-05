@@ -25,3 +25,7 @@ yarn-debug.log*
 
 venv/
 backend/*/__pycache__/*
+TF_IDF_Calculated_Title.obj
+TF_IDF_Calculated_File.obj
+backend/main/best_classifier.pt
+.ipynb_checkpoints/
