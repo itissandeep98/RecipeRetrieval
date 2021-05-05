@@ -20,13 +20,13 @@ def index():
     input_tensor = preprocess(input_image)
     input_batch = input_tensor.unsqueeze(0)
 
-    model = torch.load('main/best_classifier.pt', map_location='cpu')
+    model = torch.load('main/Data/best_classifier.pt', map_location='cpu')
     if torch.cuda.is_available():
         input_batch = input_batch.to('cuda')
         model.to('cuda')
     with torch.no_grad():
         output = model(input_batch)
-    with open("main/food_labels.txt", "r") as f:
+    with open("main/Data/food_labels.txt", "r") as f:
         categories = [s.strip() for s in f.readlines()]
 
     probabilities = torch.nn.functional.softmax(output[0], dim=0)
@@ -35,14 +35,10 @@ def index():
     return {"response": categories[top1_catid[0]]}
 
 
-@app.route('/comparator', methods=['POST'])
+@app.route('/results', methods=['POST'])
 def comparator():
-    sentence_query = request.json['sentence']
+    sentence_query = request.json['query']
 
     # Performing preprocessing(splitting, uppercase, stripping space from endpoints) on the operand input
-    operands_ = list(
-        map(str.strip, request.json['operands'].upper().split(",")))
-
-    query = Query("main/output_25k.json")
-    sol = query.processQuery(sentence_query, operands_)
-    return {"response": list(sol[0].getMapping('main/mapping_25k.json')), "comparison": sol[1]}
+    result = getResults(sentence_query)
+    return result

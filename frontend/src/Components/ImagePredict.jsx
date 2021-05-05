@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Col, Row, Spinner } from "reactstrap";
-import { Button, Icon, Image, Input, Label, Table } from "semantic-ui-react";
+import { Spinner } from "reactstrap";
+import { Button, Image, Input, Label, Table } from "semantic-ui-react";
 import {
   addInput,
   getData,
