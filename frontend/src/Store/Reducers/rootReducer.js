@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import modelReducer from "./model";
+import inputReducer from "./Inputs";
 
 const rootReducer = combineReducers({
-  model: modelReducer,
+  input: inputReducer,
 });
 
 export default rootReducer;

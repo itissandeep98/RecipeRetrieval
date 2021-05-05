@@ -66,3 +66,21 @@ export const getResult = (data) => {
       });
   };
 };
+
+export const addInput = (data) => {
+  return async (dispatch) => {
+    dispatch({ type: ActionTypes.IMAGE_ADD_SUCCESS, ...data });
+  };
+};
+
+export const deleteInput = (data) => {
+  return async (dispatch) => {
+    dispatch({ type: ActionTypes.IMAGE_DELETE_SUCCESS, ...data });
+  };
+};
+
+export const addCommonIngredient = (data) => {
+  return async (dispatch) => {
+    dispatch({ type: ActionTypes.INGREDIENT_ADD_SUCCESS, ...data });
+  };
+};
