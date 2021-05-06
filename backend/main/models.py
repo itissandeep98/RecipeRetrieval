@@ -144,18 +144,19 @@ class InvertedIndex():
         json.dump(self.termsInFile, open("TermsInfile"+file, "w"))
 
 
-with open('main/Data/ProjectFile.obj', 'rb') as file_object:
-    raw_data = file_object.read()
-file_obj = pickle.loads(raw_data)
 
-with open('main/Data/ProjectTitle.obj', 'rb') as file_object:
-    raw_data = file_object.read()
-title_obj = pickle.loads(raw_data)
+# with open('main/Data/ProjectFile.obj', 'rb') as file_object:
+#     raw_data = file_object.read()
+# file_obj = pickle.loads(raw_data)
 
-with open('main/Data/TF_IDF_Calculated_File.obj', 'rb') as file_object:
-    raw_data = file_object.read()
-file_tf_idf_obj = pickle.loads(raw_data)
+# with open('main/Data/ProjectTitle.obj', 'rb') as file_object:
+#     raw_data = file_object.read()
+# title_obj = pickle.loads(raw_data)
 
-with open('main/Data/TF_IDF_Calculated_Title.obj', 'rb') as file_object:
-    raw_data = file_object.read()
-title_tf_idf_obj = pickle.loads(raw_data)
+# with open('main/Data/TF_IDF_Calculated_File.obj', 'rb') as file_object:
+#     raw_data = file_object.read()
+# file_tf_idf_obj = pickle.loads(raw_data)
+
+# with open('main/Data/TF_IDF_Calculated_Title.obj', 'rb') as file_object:
+#     raw_data = file_object.read()
+# title_tf_idf_obj = pickle.loads(raw_data)
