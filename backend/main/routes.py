@@ -5,6 +5,12 @@ from PIL import Image
 from torchvision import transforms
 import torch
 import urllib
+import pickle
+
+
+@app.route('/', methods=['GET'])
+def home():
+    return "Information retrieval"
 
 
 @app.route('/', methods=['POST'])
@@ -38,7 +44,18 @@ def index():
 @app.route('/results', methods=['POST'])
 def comparator():
     sentence_query = request.json['query']
+    with open('main/Data/ProjectFile.obj', 'rb') as file_object:
+        file_obj = pickle.load(file_object)
 
-    # Performing preprocessing(splitting, uppercase, stripping space from endpoints) on the operand input
-    result = getResults(sentence_query)
-    return result
+    with open('main/Data/ProjectTitle.obj', 'rb') as file_object:
+        title_obj = pickle.load(file_object)
+
+    with open('main/Data/TF_IDF_Calculated_File.obj', 'rb') as file_object:
+        file_tf_idf_obj = pickle.load(file_object)
+
+    with open('main/Data/TF_IDF_Calculated_Title.obj', 'rb') as file_object:
+        title_tf_idf_obj = pickle.load(file_object)
+
+    result = Results(file_obj, title_obj,
+                     file_tf_idf_obj, title_tf_idf_obj)
+    return {"data":result.getResults(sentence_query)}

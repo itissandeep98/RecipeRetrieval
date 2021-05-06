@@ -48,19 +48,20 @@ export const getData = (data) => {
 
 export const getResult = (data) => {
   return async (dispatch) => {
-    dispatch({ type: ActionTypes.COMPARATOR_REQUEST });
+    dispatch({ type: ActionTypes.RESULT_REQUEST, data });
     return await axios
-      .post(`${apiUrl}comparator`, data)
+      .post(`${apiUrl}results`, data)
       .then((response) => {
         dispatch({
-          type: ActionTypes.COMPARATOR_SUCCESS,
+          type: ActionTypes.RESULT_SUCCESS,
           data: response.data,
         });
+        return response?.data?.data
       })
       .catch((error) => {
         console.log(error);
         dispatch({
-          type: ActionTypes.COMPARATOR_FAILED,
+          type: ActionTypes.RESULT_FAILED,
           errmess: "Error in connection with Server",
         });
       });

@@ -5,13 +5,12 @@ from nltk.stem import SnowballStemmer
 import json
 import string
 import numpy as np
-from collections import defaultdict, Counter
+from collections import Counter
 from tqdm.notebook import tnrange
-import pickle
 
 
-nltk.download("punkt")
-nltk.download("stopwords")
+# nltk.download("punkt")
+# nltk.download("stopwords")
 
 
 class tf_idfmatrices():
@@ -41,59 +40,64 @@ class tf_idfmatrices():
                     self.counter_lists[j][self.vocabulary[i]]/len(self.tokens[j]))*self.idf[self.vocabulary[i]]
 
 
-def stripSpecialChar(text):
-    return ''.join(ch for ch in text if ch.isalnum() and not ch.isdigit() and ch not in string.punctuation)
+class Results():
+    def __init__(self, file_obj, title_obj,
+                 file_tf_idf_obj, title_tf_idf_obj):
+        self.file_obj = file_obj
+        self.title_obj = title_obj
+        self.file_tf_idf_obj = file_tf_idf_obj
+        self.title_tf_idf_obj = title_tf_idf_obj
 
+    def stripSpecialChar(self, text):
+        return ''.join(ch for ch in text if ch.isalnum() and not ch.isdigit() and ch not in string.punctuation)
 
-def preProcess(text):
-    stemmer = SnowballStemmer("english")
-    stopWords = set(stopwords.words('english'))
+    def preProcess(self, text):
+        stemmer = SnowballStemmer("english")
+        stopWords = set(stopwords.words('english'))
 
-    # convert all text to lower case
-    text = text.lower()
-    # tokenizing the text
-    text_tokens = word_tokenize(text)
+        # convert all text to lower case
+        text = text.lower()
+        # tokenizing the text
+        text_tokens = word_tokenize(text)
 
-    stemmedWords = list([stemmer.stem(word) for word in text_tokens])
-    validTokens = [i for i in stemmedWords if i not in stopWords]
+        stemmedWords = list([stemmer.stem(word) for word in text_tokens])
+        validTokens = [i for i in stemmedWords if i not in stopWords]
 
-    # stripping special characters
-    validTokens = [stripSpecialChar(x) for x in validTokens]
-    # Choosing only words which has length > 1
-    validTokens = [x for x in validTokens if len(x) > 1]
-    return set(validTokens)
+        # stripping special characters
+        validTokens = [self.stripSpecialChar(x) for x in validTokens]
+        # Choosing only words which has length > 1
+        validTokens = [x for x in validTokens if len(x) > 1]
+        return set(validTokens)
 
+    def getscore(self, objtype, listofwords, query_eval):
+        indextolookfor = []
+        for word in listofwords:
+            # instead of forming a query vector, we just extracted the indices of the querytokens
+            index = objtype.vocabulary.index(word)
+            indextolookfor.append(index)
+        for docs in range(objtype.docs_count):
+            for query in indextolookfor:
+                query_eval[docs][0] += (objtype.tf_idf_TermFreq[docs][query])
 
-def getResults(sentence_query):
-    listofwords = preProcess(sentence_query)
-    query_eval = np.zeros((title_tf_idf_obj.docs_count, 1))
-    getscore(title_tf_idf_obj, listofwords)
-    getscore(file_tf_idf_obj, listofwords)
+    def Top5(self, alist):
+        return sorted(range(len(alist)), key=lambda i: alist[i], reverse=True)[:5]
 
-    ans = Top5(query_eval[:, 0])
-    f = open('main/Data/Final_mapping.json',)
-    d = json.load(f)
+    def getResults(self, sentence_query):
+        listofwords = self.preProcess(sentence_query)
+        query_eval = np.zeros((self.title_tf_idf_obj.docs_count, 1))
+        self.getscore(self.title_tf_idf_obj, listofwords, query_eval)
+        self.getscore(self.file_tf_idf_obj, listofwords, query_eval)
 
-    for i in ans:
-        file1 = open(d[i], "r")
-        print(d[i][15:-4])
-        print(file1.readline())
+        ans = self.Top5(query_eval[:, 0])
+        mapping = json.load(open('main/Data/Final_mapping.json',))
+        data = []
 
-
-def getscore(objtype, listofwords):
-    indextolookfor = []
-    for word in listofwords:
-        # instead of forming a query vector, we just extracted the indices of the querytokens
-        index = objtype.vocabulary.index(word)
-        indextolookfor.append(index)
-    for docs in range(objtype.docs_count):
-        for query in indextolookfor:
-            query_eval[docs][0] += (objtype.tf_idf_TermFreq[docs][query])
-
-
-def Top5(alist):
-    return sorted(range(len(alist)), key=lambda i: alist[i], reverse=True)[:5]
-
+        for i in ans:
+            file1 = open("main/"+mapping[i], "r")
+            fileid = mapping[i][15:-4]
+            recipe = file1.readline()
+            data.append({"key": fileid, "title": recipe,"message":"test"})
+        return data
 
 
 class InvertedIndex():
@@ -142,21 +146,3 @@ class InvertedIndex():
         '''
         json.dump(self.DFpostings, open("DFPostings"+file, "w"))
         json.dump(self.termsInFile, open("TermsInfile"+file, "w"))
-
-
-
-# with open('main/Data/ProjectFile.obj', 'rb') as file_object:
-#     raw_data = file_object.read()
-# file_obj = pickle.loads(raw_data)
-
-# with open('main/Data/ProjectTitle.obj', 'rb') as file_object:
-#     raw_data = file_object.read()
-# title_obj = pickle.loads(raw_data)
-
-# with open('main/Data/TF_IDF_Calculated_File.obj', 'rb') as file_object:
-#     raw_data = file_object.read()
-# file_tf_idf_obj = pickle.loads(raw_data)
-
-# with open('main/Data/TF_IDF_Calculated_Title.obj', 'rb') as file_object:
-#     raw_data = file_object.read()
-# title_tf_idf_obj = pickle.loads(raw_data)
