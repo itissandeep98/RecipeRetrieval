@@ -5,12 +5,14 @@ import { Button, Icon } from "semantic-ui-react";
 import { useState } from "react";
 import CommonIngredients from "./CommonIngredients";
 import Results from "./Results";
+import AddUrl from "./AddUrl";
 
 function Home(props) {
   const [index, setIndex] = useState(0);
 
   const steps = [
-    <ImagePredict inputs={props.input.images} />,
+    <AddUrl />,
+    <ImagePredict inputs={props.input} />,
     <CommonIngredients inputs={props.input.ingredients} />,
     <Results inputs={props.input} />,
   ];

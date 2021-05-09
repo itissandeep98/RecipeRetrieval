@@ -21,7 +21,7 @@ function ImagePredict(props) {
         file: file,
       };
       dispatch(uploadContent(data)).then((res) => {
-        dispatch(getData({ url: res })).then((pred) => {
+        dispatch(getData({ apiUrl: inputs.url, data: { url: res } })).then((pred) => {
           dispatch(addInput({ image: res, pred: pred }));
           setLoading(false);
         });
@@ -41,7 +41,7 @@ function ImagePredict(props) {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {inputs.map((image, i) => (
+        {inputs?.images.map((image, i) => (
           <Table.Row key={i}>
             <Table.Cell>
               <Image src={image.img} size="small" />

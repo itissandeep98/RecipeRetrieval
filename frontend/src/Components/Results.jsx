@@ -15,7 +15,7 @@ function Results(props) {
   const dispatch = useDispatch();
   const submit = () => {
     setLoading(true);
-    dispatch(getResult({ query })).then((res) => {
+    dispatch(getResult({ apiUrl: inputs.url, data: { query } })).then((res) => {
       setData(res);
       setLoading(false);
     });

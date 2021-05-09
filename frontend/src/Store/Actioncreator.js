@@ -1,9 +1,7 @@
 import * as ActionTypes from "./ActionTypes";
 import { storage } from "../Config/fire";
 import axios from "axios";
-import { apiUrl } from "./Url";
 
-console.log(apiUrl);
 export const uploadContent = (data) => {
   return async (dispatch) => {
     dispatch({ type: ActionTypes.UPLOAD_REQUEST });
@@ -25,7 +23,7 @@ export const uploadContent = (data) => {
   };
 };
 
-export const getData = (data) => {
+export const getData = ({ apiUrl, data }) => {
   return async (dispatch) => {
     dispatch({ type: ActionTypes.DATA_REQUEST });
     return await axios
@@ -38,7 +36,7 @@ export const getData = (data) => {
         return response.data.response;
       })
       .catch((error) => {
-        console.log(apiUrl,error);
+        console.log(apiUrl, error);
         dispatch({
           type: ActionTypes.DATA_FAILED,
           errmess: "Error in connection with Server",
@@ -47,7 +45,7 @@ export const getData = (data) => {
   };
 };
 
-export const getResult = (data) => {
+export const getResult = ({ apiUrl, data }) => {
   return async (dispatch) => {
     dispatch({ type: ActionTypes.RESULT_REQUEST, data });
     return await axios
@@ -57,7 +55,7 @@ export const getResult = (data) => {
           type: ActionTypes.RESULT_SUCCESS,
           data: response.data,
         });
-        return response?.data?.data
+        return response?.data?.data;
       })
       .catch((error) => {
         console.log(error);
@@ -84,5 +82,11 @@ export const deleteInput = (data) => {
 export const addCommonIngredient = (data) => {
   return async (dispatch) => {
     dispatch({ type: ActionTypes.INGREDIENT_ADD_SUCCESS, ...data });
+  };
+};
+
+export const addApiUrl = (data) => {
+  return async (dispatch) => {
+    dispatch({ type: ActionTypes.URL_ADD_SUCCESS, ...data });
   };
 };

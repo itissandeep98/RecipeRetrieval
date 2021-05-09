@@ -21,7 +21,9 @@ const inputReducer = (state = initState, action) => {
     case ActionTypes.INGREDIENT_ADD_SUCCESS:
       return { ...state, ingredients: [...action.items] };
 
-   
+    case ActionTypes.URL_ADD_SUCCESS:
+      return { ...state, url: action.url };
+
     default:
       return state;
   }
