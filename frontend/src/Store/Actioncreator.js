@@ -3,6 +3,7 @@ import { storage } from "../Config/fire";
 import axios from "axios";
 import { apiUrl } from "./Url";
 
+console.log(apiUrl);
 export const uploadContent = (data) => {
   return async (dispatch) => {
     dispatch({ type: ActionTypes.UPLOAD_REQUEST });
@@ -37,7 +38,7 @@ export const getData = (data) => {
         return response.data.response;
       })
       .catch((error) => {
-        console.log(error);
+        console.log(apiUrl,error);
         dispatch({
           type: ActionTypes.DATA_FAILED,
           errmess: "Error in connection with Server",
