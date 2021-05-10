@@ -19,7 +19,7 @@ jobs:
           git config --global init.defaultBranch "main"
           cd frontend
           npm install
-          git config user.name "khansajeel"
-          git config user.email "sajeel18342@iiitd.ac.in"
-          git remote set-url origin https://khansajeel:${{secrets.ACCESS_TOKEN}}@github.com/khansajeel/InformationRetrieval_2021_T34_Project
+          git config user.name "itissandeep98/"
+          git config user.email "itissandeep98/@gmail.com"
+          git remote set-url origin https://itissandeep98/:${{secrets.ACCESS_TOKEN}}@github.com/itissandeep98/RecipeRetrieval
           npm run deploy
