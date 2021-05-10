@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/InformationRetrieval_2021_T34_Project/static/css/main.91340386.chunk.css",
-    "main.js": "/InformationRetrieval_2021_T34_Project/static/js/main.9c6ed159.chunk.js",
-    "main.js.map": "/InformationRetrieval_2021_T34_Project/static/js/main.9c6ed159.chunk.js.map",
-    "runtime-main.js": "/InformationRetrieval_2021_T34_Project/static/js/runtime-main.d9ec4ca7.js",
-    "runtime-main.js.map": "/InformationRetrieval_2021_T34_Project/static/js/runtime-main.d9ec4ca7.js.map",
+    "main.js": "/InformationRetrieval_2021_T34_Project/static/js/main.e5e6787d.chunk.js",
+    "main.js.map": "/InformationRetrieval_2021_T34_Project/static/js/main.e5e6787d.chunk.js.map",
+    "runtime-main.js": "/InformationRetrieval_2021_T34_Project/static/js/runtime-main.c3bada0f.js",
+    "runtime-main.js.map": "/InformationRetrieval_2021_T34_Project/static/js/runtime-main.c3bada0f.js.map",
     "static/js/2.05b31050.chunk.js": "/InformationRetrieval_2021_T34_Project/static/js/2.05b31050.chunk.js",
     "static/js/2.05b31050.chunk.js.map": "/InformationRetrieval_2021_T34_Project/static/js/2.05b31050.chunk.js.map",
     "static/css/3.786d0152.chunk.css": "/InformationRetrieval_2021_T34_Project/static/css/3.786d0152.chunk.css",
     "static/js/3.accc0273.chunk.js": "/InformationRetrieval_2021_T34_Project/static/js/3.accc0273.chunk.js",
     "static/js/3.accc0273.chunk.js.map": "/InformationRetrieval_2021_T34_Project/static/js/3.accc0273.chunk.js.map",
-    "static/js/4.7eb55be5.chunk.js": "/InformationRetrieval_2021_T34_Project/static/js/4.7eb55be5.chunk.js",
-    "static/js/4.7eb55be5.chunk.js.map": "/InformationRetrieval_2021_T34_Project/static/js/4.7eb55be5.chunk.js.map",
+    "static/js/4.0d648acb.chunk.js": "/InformationRetrieval_2021_T34_Project/static/js/4.0d648acb.chunk.js",
+    "static/js/4.0d648acb.chunk.js.map": "/InformationRetrieval_2021_T34_Project/static/js/4.0d648acb.chunk.js.map",
     "static/js/5.db5382bb.chunk.js": "/InformationRetrieval_2021_T34_Project/static/js/5.db5382bb.chunk.js",
     "static/js/5.db5382bb.chunk.js.map": "/InformationRetrieval_2021_T34_Project/static/js/5.db5382bb.chunk.js.map",
     "index.html": "/InformationRetrieval_2021_T34_Project/index.html",
@@ -23,10 +23,10 @@
     "static/media/font-awesome.css": "/InformationRetrieval_2021_T34_Project/static/media/fontawesome-webfont.f691f37e.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.d9ec4ca7.js",
+    "static/js/runtime-main.c3bada0f.js",
     "static/css/3.786d0152.chunk.css",
     "static/js/3.accc0273.chunk.js",
     "static/css/main.91340386.chunk.css",
-    "static/js/main.9c6ed159.chunk.js"
+    "static/js/main.e5e6787d.chunk.js"
   ]
 }
